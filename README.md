@@ -41,7 +41,7 @@ The server port is an int with the remaining fields strings.
 To add routes, use the following syntax
 
 ```php
-$router->get($route, $content, $options = []);
+$this->router->get($route, $content, $options = []);
 ```
 
 Where `route` is a string, `content` is a string, either a normal string or a php script to be evaluated and `$options` 
