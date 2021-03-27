@@ -11,7 +11,7 @@ Its usage is simple, it's operation is simple.
 
 ## Installation
 
-    composer require ronappleton/staticweb
+    composer require ronappleton/static-web
 
 ## Usage
 
