@@ -2,13 +2,16 @@
     "name": "ronappleton/static-web",
     "description": "Testing PHP Server",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ron Appleton",
             "email": "ron@appleton.digital"
         }
     ],
-    "require": {},
+    "require": {
+        "php" : ">=5.4"
+    },
     "autoload": {
         "psr-4": {
             "RonAppleton\\StaticWeb\\": "src"
