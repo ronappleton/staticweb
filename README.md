@@ -7,7 +7,7 @@ It was created for the purpose of testing the middleware of a guzzle client.
 
 It was created for using in unit tests.
 
-Its usage is simple, it's operation is simple because of this, any version of php above 5.4 can be used.
+Its usage is simple, it's operation is simple, because of this, any version of php above 5.4 can be used.
 
 ## Installation
 
