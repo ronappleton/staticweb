@@ -16,8 +16,8 @@ Its usage is simple, it's operation is simple.
 ## Usage
 
 This usage example covers unit tests only as that it was made for, however it is not limited
-to that usage, but please on use it for local testing environments, it's single
-threaded and thus will block.
+to that usage, but please only use it for local testing environments, it's single
+threaded and thus will block and is in no way useable in a production environment.
 
 Add 2 use statements to the top of you test class
 
@@ -62,3 +62,7 @@ All standard route methods are available
 However, you should continually bear in mind that it is up to your to provide the responses.
 
 In your tear down method simply call `Server::stop();` to kill the server.
+
+Whilst the server is limited in its usage, remember that you can pass the contents of a php file to be evaulated before
+returning the response, this means that all your super globals etcetera are available for your usage so if you need query parameters,
+get them within your evaluated script.
