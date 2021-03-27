@@ -62,3 +62,7 @@ All standard route methods are available
 However, you should continually bear in mind that it is up to your to provide the responses.
 
 In your tear down method simply call `Server::stop();` to kill the server.
+
+Whilst the server is limited in its usage, remember that you can pass the contents of a php file to be evaulated before
+returning the response, this means that all your super globals etcetera are available for your usage so if you need query parameters,
+get them within your evaluated script.
