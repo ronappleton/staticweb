@@ -16,8 +16,8 @@ Its usage is simple, it's operation is simple.
 ## Usage
 
 This usage example covers unit tests only as that it was made for, however it is not limited
-to that usage, but please on use it for local testing environments, it's single
-threaded and thus will block.
+to that usage, but please only use it for local testing environments, it's single
+threaded and thus will block and is in no way useable in a production environment.
 
 Add 2 use statements to the top of you test class
 
