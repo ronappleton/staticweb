@@ -32,11 +32,23 @@ at the start of your test methods.
 A thing to note is that the routes are reloaded before every request is processed
 
 ```php
-$this->serverProcess = Server::run($port, $domain, $docRoot, $routerRoute);
+$this->serverProcess = Server::run();
 $this->router = new Router();
 ```
 
-The server port is an int with the remaining fields strings.
+The following shows a list of default arguments when starting the server.
+
+```php
+Server::run(
+    $port = 8000, 
+    $domain = 'localhost', 
+    $docRoot = __DIR__ . '/docroot/index.php', 
+    $routerRoot = null, 
+    $outputPath = '/dev/null 2>&1;');
+```
+Where routerRoute is the file path to alternative routing than the package gives.
+
+Output path is the directory level of where you would like your error and log files creating.
 
 To add routes, use the following syntax
 
@@ -66,6 +78,6 @@ In your tear down method simply call
 Server::stop($this->serverProcess);
 ```
 
-Whilst the server is limited in its usage, remember that you can pass the contents of a php file to be evaulated before
-returning the response, this means that all your super globals etcetera are available for your usage so if you need query parameters,
+Whilst the server is limited in its usage, remember that you can pass the contents of a php file to be evaluated before
+returning the response, this means that all your super globals etc. are available for your usage so if you need query parameters,
 get them within your evaluated script.
