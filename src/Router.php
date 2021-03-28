@@ -19,6 +19,17 @@ class Router
      */
     protected $resolving = null;
 
+    public function __construct()
+    {
+        if (!defined('STDOUT')) {
+            define('STDOUT', fopen('php://stdout', 'w'));
+        }
+
+        if (!defined('STDERR')) {
+            define('STDERR', fopen('php://stderr', 'w'));
+        }
+    }
+
     /**
      * @param string $route
      * @param string $content
@@ -143,21 +154,25 @@ class Router
      */
     public function resolve()
     {
+        $this->loadCache();
         $this->setResolving();
 
-        if (null === $this->resolving) {
+        if (!isset($this->routeCache[$this->resolving]) || null === $this->routeCache) {
+            error_log("Route [$this->resolving] not found, sending 404");
             http_response_code(404);
             header("HTTP/1.0 404 Not Found", true);
             exit;
         }
 
-        $this->loadCache();
         $this->validateMethod();
         $this->setHeaders();
 
         $content = $this->getContent();
+        $content = strpos($content, '<?php') !== false ? eval(str_replace('<?php', '', $content) . PHP_EOL) : $content;
+        echo $content;
 
-        echo strpos($content, '<?php') !== false ? eval(str_replace('<?php', '', $content) . PHP_EOL) : $content;
+        fwrite(STDOUT, '[' . date('Y-m-d H:i:s') . ']' . " - Route [$this->resolving] successfully processed" . PHP_EOL);
+        fwrite(STDOUT, $content . PHP_EOL);
         exit;
     }
 
@@ -183,7 +198,7 @@ class Router
     }
 
     /**
-     * @return string
+     * Set the route name we are resolving.
      */
     protected function setResolving()
     {
@@ -249,6 +264,7 @@ class Router
         $requestMethod = strtoupper($_SERVER['REQUEST_METHOD']);
 
         if (!in_array($requestMethod, $methods, true) && !in_array('ANY', $methods, true)) {
+            error_log("Route [$this->resolving] called with wrong method [$requestMethod]");
             header($_SERVER["SERVER_PROTOCOL"] . " 405 Method Not Allowed", true, 405);
             exit;
         }

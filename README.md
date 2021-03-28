@@ -32,7 +32,7 @@ at the start of your test methods.
 A thing to note is that the routes are reloaded before every request is processed
 
 ```php
-Server::run($port, $domain, $docRoot, $routerRoute);
+$this->serverProcess = Server::run($port, $domain, $docRoot, $routerRoute);
 $this->router = new Router();
 ```
 
@@ -61,7 +61,10 @@ All standard route methods are available
 
 However, you should continually bear in mind that it is up to your to provide the responses.
 
-In your tear down method simply call `Server::stop();` to kill the server.
+In your tear down method simply call 
+```php
+Server::stop($this->serverProcess);
+```
 
 Whilst the server is limited in its usage, remember that you can pass the contents of a php file to be evaulated before
 returning the response, this means that all your super globals etcetera are available for your usage so if you need query parameters,
